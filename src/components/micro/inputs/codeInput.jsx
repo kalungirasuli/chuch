@@ -1,11 +1,11 @@
 import  { useState, useRef } from "react";
 
-const InputCode = ({ length, label, loading, onComplete }) => {
+export function InputVCode({ length, label, loading, onComplete }){
   const [code, setCode] = useState([...Array(length)].map(() => ""));
   const inputs = useRef([]);
   // Typescript
   // useRef<(HTMLInputElement | null)[]>([])
-
+  const [data,setData]=useState('')
   const processInput = (e, slot) => {
     const num = e.target.value;
     if (/[^0-9]/.test(num)) return;
@@ -16,10 +16,11 @@ const InputCode = ({ length, label, loading, onComplete }) => {
       inputs.current[slot + 1].focus();
     }
     if (newCode.every(num => num !== "")) {
-      onComplete(newCode.join(""));
+     setData(onComplete(newCode.join(""))) 
+ 
     }
   };
-
+ 
   const onKeyUp = (e, slot) => {
     if (e.keyCode === 8 && !code[slot] && slot !== 0) {
       const newCode = [...code];
@@ -30,9 +31,9 @@ const InputCode = ({ length, label, loading, onComplete }) => {
   };
 
   return (
-    <div className="code-input">
-      <label className="code-label">{label}</label>
-      <div className="code-inputs">
+    <div className="code-input w-full flex flex-col gap-3">
+      <label className="code-label text-white text-[20px] font-bold ">{label}</label>
+      <div className="code-inputs grid grid-cols-6 gap-3 w-full h-[40px] md:h-[50px]">
         {code.map((num, idx) => {
           return (
             <input
@@ -46,12 +47,13 @@ const InputCode = ({ length, label, loading, onComplete }) => {
               onChange={e => processInput(e, idx)}
               onKeyUp={e => onKeyUp(e, idx)}
               ref={ref => inputs.current.push(ref)}
+              className="bg-gray-300 h-full w-full rounded-0 outline-none border-0 focus:outline-2 focus:outline-yellow"
             />
           );
         })}
-      </div>
+      </div> 
+      <button className="font-extrabold text-[20px] bg-yellow hover:bg-amber-600 rounded-0 text-white text-center p-2 w-[150px] md:w-[200px]">Resend</button>
     </div>
   );
 };
 
-export default InputCode;
