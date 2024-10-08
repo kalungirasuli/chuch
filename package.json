@@ -11,7 +11,14 @@
     "start": "npm run dev"
   },
   "dependencies": {
+    "@firebasegen/default": "file:generated/javascript/default",
+    "@react-email/components": "^0.0.25",
+    "bcryptjs": "^2.4.3",
+    "firebase": "^10.14.0",
+    "flowbite": "^2.5.2",
     "flowbite-react": "^0.10.1",
+    "jsonwebtoken": "^9.0.2",
+    "nodemailer": "^6.9.15",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-icons": "^5.3.0",

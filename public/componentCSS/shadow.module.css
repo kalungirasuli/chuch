@@ -1,0 +1,6 @@
+
+.shadoWhite{
+    -webkit-box-shadow:0px 0px 182px 8px rgba(242,245,244,0.9);
+-moz-box-shadow: 0px 0px 182px 8px rgba(242,245,244,0.9);
+box-shadow: 0px 0px 182px 8px rgba(242,245,244,0.9);
+}

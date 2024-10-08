@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom"
 
 export function Footer(){
+    const currentDate=new Date()
     return(
         <>
         <div className="footer bg-white flex flex-col gap-5">
@@ -30,7 +31,7 @@ export function Footer(){
                 </Link>
             </ul>
             <div className="text-white text-[15px] text-center bg-black p-5">
-                copyright 2024 Heart of Worship
+                copyright {currentDate.getFullYear()} Heart of Worship
             </div>
         </div>
         </>
