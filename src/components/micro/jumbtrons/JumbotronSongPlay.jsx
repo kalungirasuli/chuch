@@ -48,7 +48,7 @@ export function JumbotronSongPlay({song}) {
                 <div key={index} className={`div w-full flex flex-col gap-10 `}>
                     <div className="div  bg-cover bg-no-repeat"
                     style={{
-                        backgroundImage: `url(${item.cover ? item.cover : ''})`,
+                        backgroundImage: `url(${item.coverUrl ? item.coverUrl : ''})`,
                         backgroundSize: 'cover',
                         backgroundPosition: 'center',
                         backgroundRepeat: 'no-repeat',  
@@ -62,7 +62,7 @@ export function JumbotronSongPlay({song}) {
                     </div>
                    <div className="div flex flex-col gap-5 p-10   w-[80%] m-auto md:gap-10 md:w-[70%] lg:max-w-[700px]">
                         <div className="album backdrop-blur-sm bg-white/30 p-2 px-5 rounded-[5px] w-[max-content] m-auto ">
-                            <p className='text-white text-[16px] font-semibold'>Album: {item.ablum && item.ablum.length > 31 ? item.ablum.substring(0, 30) + "..." : item.ablum}</p>
+                            <p className='text-white text-[16px] font-semibold'>Album: {item.name && item.name.length > 31 ? item.name.substring(0, 30) + "..." : item.name}</p>
                         </div>
                         <div className="name pb-5">
                             <h3 className='text-[20px] md:text-[30px] text-white text-center font-extrabold'>{item.artist && item.artist.length > 30 ? item.artist.substring(0, 30) + "..." : item.artist}</h3>
@@ -115,7 +115,7 @@ export function JumbotronSongPlay({song}) {
                     </div>
                     <audio
                         ref={audioRef}
-                        src={item.audio ? item.audio : ''}
+                        src={item.audioUrl ? item.audioUrl : ''}
                         onTimeUpdate={handleTimeUpdate}
                         onLoadedMetadata={handleLoadedMetadata}
                         className='hidden audio'

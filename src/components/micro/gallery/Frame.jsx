@@ -32,7 +32,7 @@ export function Frame() {
                     {Trends[0]?.face && (
                         <div className="face relative h-[300px] min-w-lg  mb-3 md:w-[330px] md:h-[330px] lg:w-[45%] lg:h-[470px] ">
                             <img src={Trends[0].face.src} alt="" className=" h-full w-full rounded-[10px]" />
-                            <div className="btn text-[20px] text-white text-center bg-red p-2  w-[70%] m-auto rounded-[10px] absolute bottom-5 left-0 right-0 hover:bg-yellow">
+                            <div className="btn text-[20px] text-white text-center bg-red1 p-2  w-[70%] m-auto rounded-[10px] absolute bottom-5 left-0 right-0 hover:bg-yellow">
                                 Listen
                             </div>
                         </div>

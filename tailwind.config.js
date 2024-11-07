@@ -13,7 +13,7 @@ export default {
         white:'#ffffff',
         black:'#2f1b07',
         yellow:'#f4c828',
-        red:'#d51515',
+        red1:'#d51515',
         brown:'#b27b45'
       },
       screens:{

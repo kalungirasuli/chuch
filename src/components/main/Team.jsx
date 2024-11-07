@@ -1,11 +1,13 @@
 import { TeamJambo } from "../micro/jumbtrons/JambatronTeam"
-
+import { WallMember } from "../micro/gallery/wallMember"
 
 export default function Team(){
     return(
         <>
-            <TeamJambo bckimg={''}/>
-            
+           <div className="div h-full max-h-[auto] bg-black">
+           <TeamJambo bckimg={'../../../public/test/clouds.jpg'}/>
+           <WallMember/>
+           </div>
         </>
     )
 }

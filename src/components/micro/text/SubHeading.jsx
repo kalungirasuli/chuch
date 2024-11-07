@@ -7,3 +7,13 @@ export function SubHead({text}){
         </>
     )
 }
+
+export function Head({text}){
+    return(
+        <>
+        <div className="div  w-full lg:w-[90%] py-2 md:py-3 lg:py-4 xl:w-[80%] ">
+            <h2 className="text-[30px] text-white font-extrabold text-left   max-w-[80%] m-auto ml-0 md:text-[40px] lg:text-[50px]">{text}</h2>
+        </div>
+        </>
+    )
+}

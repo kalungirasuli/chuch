@@ -141,3 +141,37 @@ export async function UpdateOrder(id,approval,status,token,clientHeaders){
         }
     }
 }
+
+
+// the create order
+/**
+ * 
+ * @param {string} token -the auth token 
+ * @param {object} clientHeaders  -the client headers
+ * @param {object} order -the order object
+ * @returns {object} -success or fail  
+ */
+export async function OrderCreate(token,clientHeaders,order){
+     try{
+        const verification= await verifyToken(token,clientHeaders)
+        if(verification.code !== 200){
+            return{
+                code:verification.code,
+                message:verification.message
+            }
+        }
+
+        const OrderRef=collection(db,'Orders')
+        await addDoc(OrderRef,order)
+        return{
+            code:200,
+            message:'Order has been created successfully'
+        }
+     }catch(error){
+        return{
+            code:error.code,
+            message:'Failed to create order'
+
+        }
+     }  
+}

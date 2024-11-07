@@ -1,4 +1,4 @@
-import jsonwebtoken from "jsonwebtoken"; // For generating JWT
+import jsonwebtoken3e from "jsonwebtoken"; // For generating JWT
 import { v4 as uuidv4 } from 'uuid'; // For generating unique token ids
 import bcrypt from "bcrypt"; // For hashing passwords
 import { db } from "../fireAppConfig";
@@ -90,7 +90,7 @@ export async function Login(email, password, clientHeaders) {
       email: userData.email,
       name: userData.name,
     };
-    const token = jsonwebtoken.sign(tokenPayload, secretKey, { expiresIn: '1h' });
+    const token = jsonwebtoken3e.sign(tokenPayload, secretKey, { expiresIn: '1h' });
 
     // Step 5: Hash the token with client headers
     const combinedData = `${token}${userAgent}${ipAddress}`;
@@ -135,11 +135,11 @@ export async function verifyToken(token, clientHeaders) {
     let decoded;
     try {
       // Step 1: Try verifying the JWT token (check structure and signature)
-      decoded = jsonwebtoken.verify(token, secretKey); // This will verify structure and signature
+      decoded = jsonwebtoken3e.verify(token, secretKey); // This will verify structure and signature
     } catch (error) {
       if (error.name === 'TokenExpiredError') {
         // Token is expired, but the structure and signature are valid
-        decoded = jsonwebtoken.decode(token); // Decode the token and proceed with verification steps
+        decoded = jsonwebtoken3e.decode(token); // Decode the token and proceed with verification steps
       } else {
         // If the token is invalid (wrong structure or signature), return an error
         return {
@@ -189,7 +189,7 @@ export async function verifyToken(token, clientHeaders) {
       email: decoded.email,
       name: decoded.name,
     };
-    const newToken = jsonwebtoken.sign(newTokenPayload, secretKey, { expiresIn: '1h' });
+    const newToken = jsonwebtoken3e.sign(newTokenPayload, secretKey, { expiresIn: '1h' });
   
     // Step 8: Hash the new token + client details (user-agent + IP)
     const newCombinedData = `${newToken}${userAgent}${ipAddress}`;

@@ -2,40 +2,44 @@ import { db } from "../fireAppConfig"
 import { collection, getDocs,addDoc } from "firebase/firestore"
 
 
-export function Newletter(email){
+export async function Newletter(email){
+   try{
     const collectionRef=collection(db,'newletter')
-    addDoc(collectionRef,{
+    await addDoc(collectionRef,{
         email:email
     })
-    .then(()=>{
-        return{
-            code:200,
-            message:'Subscribed to newletter'
-        }
-    })
-    .catch((error)=>{
+    console.log('successful')
+    return{
+        code:200,
+        message:'Subscribed to newletter'
+    }
+    
+   }
+    catch(error){
+        console.log('failure')
         return{
             code:error.code,
             message:error.message
         }
-    })
+    }
 
 }
-export function GetNewletter(){
+export async function GetNewletter(){
+   try{
     const collectionRef=collection(db,'newletter')
-    getDocs(collectionRef)
-    .then((response)=>{
-        response.docs.map((doc)=>{
-            return{
-                code:200,
-                data:doc.data()
-            }
-        })
-    })
-    .catch((error)=>{
+    const response= getDocs(collectionRef)
+    await response
+    response.docs.map((doc)=>{
+         return{
+             code:200,
+             data:doc.data()
+         }
+     })
+   }
+    catch(error){
         return{
             code:error.code,
             message:error.message
         }
-    });
+    };
 }

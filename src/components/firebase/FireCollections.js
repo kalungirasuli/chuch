@@ -23,58 +23,43 @@ export function Payments(){}
 // export function Orders(){}
 // export function UsersOrders(){}
 // export function UpdateOrders(){}
+// export function CreateOrders(){}
 
 
 
 // the products
-export function Products(){}
-
-export function ProductSingle(){}
-
-export function ProductAdd(){}
-
-export function ProductDelete(){}
+// export function Products(){}
+// export function ProductSingle(){}
+// export function ProductAdd(){}
+// export function ProductDelete(){}
+//exort  function ProductUpdate(){}
 
 // the music
-export function  MusicAll(){}
-
-export function MusicSingle(){}
-
-export function MusicAdd(){}
-
-export function MusicDelete(){}
-
-export function MusicUpdate(){}
+// export function  MusicAll(){}
+// export function MusicSingle(){}
+// export function MusicAdd(){}
+// export function MusicDelete(){}
+// export function MusicUpdate(){}
 
 // the events
 
-export function EventsAll(){}
-
-export function EventSingle(){}
-
-export function EventAdd(){}
-
-export function EventDelete(){}
+// export function EventsAll(){}
+// export function EventSingle(){}
+// export function EventAdd(){}
+// export function EventDelete(){}
 
 
 
 // the team
-export function TeamAll(){}
-
-export function TeamAdd(){}
-
-export function TeamSingleAndUpdate(){}
-
-export function TeamDelete(){}
+// export function TeamAll(){}
+// export function TeamAdd(){}
+// export function TeamSingleAndUpdate(){}
+// export function TeamDelete(){}
 
 // the tour
 
-export function Tours(){}
-
-export function TourSingle(){}
-
-export function TourAdd(){}
-
-export function TourUpdate(){}
-
-export function TourDelete(){}
+// export function Tours(){}
+// export function TourSingle(){}
+// export function TourAdd(){}
+// export function TourUpdate(){}
+// export function TourDelete(){}
