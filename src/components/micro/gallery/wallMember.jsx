@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { getAllTeamMembers } from "../../firebase/Functions/Team"
 import { Navigate } from "react-router-dom"
-import { SubHead } from "../text/SubHeading"S
+import { SubHead } from "../text/SubHeading"
 import { Member } from "./Member"
 export function WallMember(){
     const [data,setData]=useState([])

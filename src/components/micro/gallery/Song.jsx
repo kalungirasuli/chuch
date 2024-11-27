@@ -1,7 +1,7 @@
 import { useLocation } from "react-router-dom"
 import { FaRegEdit } from "react-icons/fa"
-import { MdDelete } from "react-icons/md"
-export function Song(src,title,id,onEdit,onDelete){
+import { MdDelete, MdPlayCircle } from "react-icons/md"
+export function Song(src,title,id,onEdit,onDelete,onPlay){
     const {location}=useLocation()
     return(
         <>
@@ -16,6 +16,9 @@ export function Song(src,title,id,onEdit,onDelete){
                         </div>
                         <div className="p-3 w-[max-content] h-auto bg-white" onClick={onDelete}>
                         <MdDelete className="text-red1 text-[20px]"/>
+                        </div>
+                        <div className="p-3 w-[max-content] h-auto bg-white" onClick={onPlay}>
+                        <MdPlayCircle className="text-green-500 text-[20px]"/>
                         </div>
                     </div>
                       ):''

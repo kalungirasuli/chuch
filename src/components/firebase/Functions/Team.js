@@ -74,7 +74,8 @@ export async function addTeamMember(member) {
  * @param {object} data - Additional updated data for the team member
  * @returns {object} - Success or failure message
  */
-export async function updateTeamMember(memberId, newImage, name, title, role, data) {
+export async function updateTeamMember(member) {
+    const {memberId, newImage, name, title, role, data } = member;
     try {
         // Step 1: Get the team member document reference
         const teamMemberRef = doc(db, 'TeamMembers', memberId);
@@ -90,7 +91,6 @@ export async function updateTeamMember(memberId, newImage, name, title, role, da
 
         const currentData = teamMemberDoc.data();
         let updatedData = { name, title, role, ...data };  // Prepare updated data
-
         // Step 3: Handle image update
         if (newImage) {
             // Delete the current image if it exists

@@ -4,7 +4,7 @@ import {MusicAdmin} from "../micro/AdminComponents/Music"
 export default function Admin(){
     return(
         <>
-        <JambotronAdmin/>
+        <JambotronAdmin param={'admin'}/>
         <div className="div bg-black">
            <Team/> 
            <MusicAdmin/>

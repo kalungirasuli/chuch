@@ -12,18 +12,35 @@ import { v4 as uuidv4 } from "uuid";  // For unique file names
 export async function loadAlbum(album) {
     try {
         // Step 1: Upload the cover picture to Firebase Storage
+       if( !album.name||!album.audioFile||!album.coverFile||!album.artists){
+        return{
+            code: 404,
+            message: 'failed to post , some data is missing  please check and try again'
+        }
+    }np
         let coverUrl = '';
         if (album.coverFile) {  // Assuming album.coverFile contains the cover image file
             const coverRef = ref(storage, `albumCovers/${uuidv4()}`);
             const coverSnapshot = await uploadBytes(coverRef, album.coverFile);
             coverUrl = await getDownloadURL(coverSnapshot.ref);
+        }else{
+            return {
+                code: 500,
+                message: 'failed to post music cover content please try again'
+            };
         }
+
         // Step 2: Upload the audio file to Firebase Storage
         let audioUrl = '';
         if (album.audioFile) {  // Assuming album.audioFile contains the audio file
             const audioRef = ref(storage, `albumAudio/${uuidv4()}`);
             const audioSnapshot = await uploadBytes(audioRef, album.audioFile);
             audioUrl = await getDownloadURL(audioSnapshot.ref);
+        }else{
+            return {
+                code: 500,
+                message: 'failed to post music content audio please try again'
+            };
         }
 
         // Step 3: Save album data to Firestore
@@ -36,14 +53,17 @@ export async function loadAlbum(album) {
             links: album.links      // Store array of external links (Spotify, Apple Music, YouTube)
 
         };
+        
+        if(albumData.audioUrl!=='' && albumData.coverUrl!==''  && albumData.artist && albumData.name){
+            const albumRef = collection(db, 'Albums');
+             await addDoc(albumRef, albumData);
+             return {
+                code: 200,
+                message: 'Album uploaded successfully'
+            };
+        }
 
-        const albumRef = collection(db, 'Albums');
-        await addDoc(albumRef, albumData);
-
-        return {
-            code: 200,
-            message: 'Album uploaded successfully'
-        };
+       
 
     } catch (err) {
         return {

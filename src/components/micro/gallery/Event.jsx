@@ -30,7 +30,7 @@ export function Event({eveBgc,venue,date,hosts,name,link}){
                                    <img key={index} src={item} alt="" className="w-[50px] h-[50px] md:w-[100px] md:h-[100px] rounded-[5px]" /> 
                                 ))
 
-                            :'No host images found ☹'}
+                            :'No host images found yet ☹'}
                             <p className="text-white">AND MANY MORE</p>
                         </div>
                     </div>
