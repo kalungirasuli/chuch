@@ -11,7 +11,7 @@ export default function Navibar({route,params}){
     const location=useLocation()
     const checkRoute=()=>{
         console.log(location.pathname)
-        if(location.pathname.toLocaleLowerCase()==route.toLowerCase()){
+        if(route && location.pathname.toLocaleLowerCase()==route.toLowerCase()){
             setHidden(params)
         }
     }
@@ -48,24 +48,21 @@ export default function Navibar({route,params}){
 const links=[
     {
         link:'Event',
-        url:'/'
+        url:'/events'
     },
     {
         link:'Music',
-        url:'/'
+        url:'/music'
     },
     {
         link:'Team',
-        url:'/'
+        url:'/team'
     },
     {
         link:'Login',
-        url:'/'
+        url:'/login'
     },
-    {
-        link:'Donate',
-        url:'/'
-    }
+   
 ]
 function Uls({param}){
     return(
@@ -82,6 +79,9 @@ function Uls({param}){
                         </Link>):''
                 ))
                }
+                <a href="http://www.example.com"  className="w-full  hover:text-yellow">
+                            Donate
+                          </a>
             </ul>
         </>
     )

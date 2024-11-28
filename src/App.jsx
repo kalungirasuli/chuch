@@ -7,6 +7,7 @@ import UserLog from "./components/micro/inputs/user"
 import Admin from "./components/main/Admin"
 import Team from './components/main/Team'
 import Events from "./components/main/Events"
+import Term from "./components/main/Terms"
 function App() {
  return(
   <>
@@ -20,7 +21,8 @@ function App() {
         <Route path="/team" element={<Team/>}/>
         <Route path="/admin" element={<Admin/>}/>
         <Route path='/events' element={<Events/>}/>
-        <Route path="/playing/" element={<SongPlay/>}/>
+        <Route path="/playing/:id" element={<SongPlay/>}/>
+        <Route path="/terms" element={<Term/>}/>
       </Routes>
     </BrowserRouter>
   </>

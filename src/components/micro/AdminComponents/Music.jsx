@@ -88,8 +88,8 @@ export  function MusicAdmin(){
             audioUrl:data.audioUrl,
             artist:data.artist,
             lyrics:data.lyrics,
-            coverUlrs:data.coverUrl,
-            links:[data.spotify,data.youtube,data.apple]
+            coverFile:data.coverUrl,
+            links:[{spotify:data.spotify,youtube:data.youtube,apple:data.apple}]
         }
         loadAlbum(layout)
         .then((response)=>{
@@ -124,7 +124,7 @@ export  function MusicAdmin(){
                 {
                     Songs.length>0?Songs.map((item,index)=>(
                         <div className="div " key={index}>
-                        <Song key={index} src={item.src} title={item.title} onDelete={()=>{Delete(item.id)}} />
+                        <Song key={index} src={item.coverUrl} id={item.id} title={item.name} onDelete={()=>{Delete(item.id)}} />
                         {/* THE update MODAL */}
                         <Modal show={addForm} size="md" popup onClose={() => setForm(false)}>
                                 <Modal.Header/>

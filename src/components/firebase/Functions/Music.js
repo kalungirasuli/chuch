@@ -17,12 +17,13 @@ export async function loadAlbum(album) {
             code: 404,
             message: 'failed to post , some data is missing  please check and try again'
         }
-    }np
+    }
         let coverUrl = '';
         if (album.coverFile) {  // Assuming album.coverFile contains the cover image file
             const coverRef = ref(storage, `albumCovers/${uuidv4()}`);
             const coverSnapshot = await uploadBytes(coverRef, album.coverFile);
             coverUrl = await getDownloadURL(coverSnapshot.ref);
+
         }else{
             return {
                 code: 500,
@@ -43,7 +44,7 @@ export async function loadAlbum(album) {
             };
         }
 
-        // Step 3: Save album data to Firestore
+        // Step 3: Save album data to Firestor e
         const albumData = {
             name: album.name,
             artist: album.artist,
@@ -260,7 +261,7 @@ export async function getAllSongs() {
         // Step 3: Check if there are any albums in the collection
         if (querySnapshot.empty) {
             return {
-                code: 404,
+                code: 200,
                 message: 'No songs found'
             };
         }

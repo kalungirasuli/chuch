@@ -94,18 +94,30 @@ export function JumbotronSongPlay({song}) {
                             <h2 className='text-white text-[20px] text-left font-extrabold md:text-[30px] lg:text-[40px]'>Lyrics</h2>
                             <div className="div flex justify-end">
                                 <ul className='flex justify-between gap-3 w-[max-content]'>
-                                    <li className='flex justify-center'>
+                                    <a className='flex justify-center'>
                                         <MdOutlineDownload className='text-[40px] fill-white  m-auto' title='down song and lyrics' />
-                                    </li>
-                                    <li className='flex justify-center'>
+                                    </a>
+                                   {
+                                    item.links[0].spotify?(
+                                        <a className='flex justify-center' href={item.links[0].spotify}>
                                         <img src="/iconImgs/spotify.png" alt="" className='w-[50px] m-auto ' title='listen on spotify' />
-                                    </li>
-                                    <li className='flex justify-center'>
+                                    </a>
+                                    ):''
+                                   }
+                                  {
+                                    item.links[0].youtube?(
+                                        <a className='flex justify-center' href={item.links[0].youtube}>
                                         <img src="/iconImgs/youtube.png" alt="" className='w-[50px] h-[50px] m-auto' title='listen on youtube' />
-                                    </li>
-                                    <li className='flex justify-center'>
+                                    </a>
+                                    ):''
+                                  }
+                                {
+                                    item.links[0].apple?(
+                                        <a className='flex justify-center' href={item.link[0].apple}>
                                         <img src="/iconImgs/applemusic.png" alt="" className='w-[50px] h-[50px] m-auto ' title='listen on apple music' />
-                                    </li>
+                                    </a>
+                                    ):''
+                                }
                                 </ul>
                             </div>
                         </div>

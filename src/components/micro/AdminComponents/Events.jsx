@@ -123,7 +123,7 @@ export  function MusicAdmin(){
                 {
                     Event.length>0?Event.map((item,index)=>(
                         <div className="div " key={index}>
-                        <Song key={index} src={item.src} title={item.title} onDelete={()=>{Delete(item.id)}} />
+                        <Song key={index} src={item.src} title={item.title} onDelete={()=>{Delete(item.id)}} on/>
                         {/* THE update MODAL */}
                         <Modal show={addForm} size="md" popup onClose={() => setForm(false)}>
                                 <Modal.Header/>
