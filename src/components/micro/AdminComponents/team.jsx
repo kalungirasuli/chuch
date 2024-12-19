@@ -1,4 +1,4 @@
-import { Member } from "../gallery/member"
+import { Member } from "../gallery/Member"
 import { SubHead } from "../text/SubHeading"
 import { useState,useEffect } from "react"
 import { Modal } from "flowbite-react"
