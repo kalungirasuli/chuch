@@ -79,9 +79,9 @@ function Uls({param}){
                         </Link>):''
                 ))
                }
-                <a href="http://www.example.com"  className="w-full  hover:text-yellow">
+                <Link to='/donate'  className="w-full  hover:text-yellow">
                             Donate
-                          </a>
+                          </Link>
             </ul>
         </>
     )

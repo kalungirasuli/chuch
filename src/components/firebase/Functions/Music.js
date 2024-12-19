@@ -1,5 +1,5 @@
 import { storage,db } from "../fireAppConfig";
-import { collection, addDoc,updateDoc,deleteDoc,getDoc,getDocs,doc } from "firebase/firestore";
+import { collection, addDoc,updateDoc,deleteDoc,getDoc,getDocs,doc, query, where } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL,deleteObject } from "firebase/storage";
 import { v4 as uuidv4 } from "uuid";  // For unique file names
 
@@ -12,17 +12,20 @@ import { v4 as uuidv4 } from "uuid";  // For unique file names
 export async function loadAlbum(album) {
     try {
         // Step 1: Upload the cover picture to Firebase Storage
-       if( !album.name||!album.audioFile||!album.coverFile||!album.artists){
+       if( !album.name||!album.audioFile||!album.coverFile||!album.artist){
+        // console.log('missing stuff')
         return{
             code: 404,
             message: 'failed to post , some data is missing  please check and try again'
         }
-    }
+    }       
+        console.log('adding urls')
         let coverUrl = '';
         if (album.coverFile) {  // Assuming album.coverFile contains the cover image file
             const coverRef = ref(storage, `albumCovers/${uuidv4()}`);
             const coverSnapshot = await uploadBytes(coverRef, album.coverFile);
             coverUrl = await getDownloadURL(coverSnapshot.ref);
+            // console.log('got cover url')
 
         }else{
             return {
@@ -37,6 +40,7 @@ export async function loadAlbum(album) {
             const audioRef = ref(storage, `albumAudio/${uuidv4()}`);
             const audioSnapshot = await uploadBytes(audioRef, album.audioFile);
             audioUrl = await getDownloadURL(audioSnapshot.ref);
+            // console.log('got audio url')
         }else{
             return {
                 code: 500,
@@ -56,8 +60,10 @@ export async function loadAlbum(album) {
         };
         
         if(albumData.audioUrl!=='' && albumData.coverUrl!==''  && albumData.artist && albumData.name){
+            // console.log('everything is okey')
             const albumRef = collection(db, 'Albums');
              await addDoc(albumRef, albumData);
+            //  console.log('added music')
              return {
                 code: 200,
                 message: 'Album uploaded successfully'
@@ -216,7 +222,7 @@ export async function getSingleAlbum(albumId) {
     try {
         // Step 1: Get the album document reference
         const albumRef = doc(db, 'Albums', albumId);
-
+        
         // Step 2: Fetch the document from Firestore
         const albumDoc = await getDoc(albumRef);
 
@@ -229,7 +235,11 @@ export async function getSingleAlbum(albumId) {
         }
 
         // Step 4: Return the album data
-        const albumData = albumDoc.data();
+        const albumData = {
+            id: albumDoc.id,        // Get the document ID
+            ...albumDoc.data()      // Spread the album data into the object
+        };
+        // console.log(albumData)
         return {
             code: 200,
             album: albumData
@@ -275,6 +285,194 @@ export async function getAllSongs() {
         return {
             code: 200,
             songs: albums
+        };
+
+    } catch (err) {
+        return {
+            code: err.code || 500,
+            message: err.message
+        };
+    }
+}
+
+export async function AddRankOnSong(albumId) {
+    try {
+        // Check if there is already a ranked song
+        const rankedSongQuery = query(collection(db, 'Albums'), where('rank', '==', true));
+        const rankedSongSnapshot = await getDocs(rankedSongQuery);
+
+        if (!rankedSongSnapshot.empty) {
+            return {
+                code: 400,
+                message: 'Only one song can be ranked at a time'
+            };
+        }
+
+        const albumRef = doc(db, 'Albums', albumId);
+        const albumDoc = await getDoc(albumRef);
+
+        if (!albumDoc.exists()) {
+            return {
+                code: 404,
+                message: 'Album not found'
+            };
+        }
+
+        const existingAlbum = albumDoc.data();
+        const updatedAlbumData = {
+            ...existingAlbum,
+            rank: true
+        };
+
+        await updateDoc(albumRef, updatedAlbumData);
+
+        return {
+            code: 200,
+            message: 'Album ranked successfully'
+        };
+
+    } catch (err) {
+        return {
+            code: err.code || 500,
+            message: err.message
+        };
+    }
+}
+
+export async function RemoveRankOnSong(albumId) {
+    try {
+        const albumRef = doc(db, 'Albums', albumId);
+        const albumDoc = await getDoc(albumRef);
+
+        if (!albumDoc.exists()) {
+            return {
+                code: 404,
+                message: 'Album not found'
+            };
+        }
+
+        const existingAlbum = albumDoc.data();
+        const updatedAlbumData = {
+            ...existingAlbum,
+            rank: false
+        };
+
+        await updateDoc(albumRef, updatedAlbumData);
+
+        return {
+            code: 200,
+            message: 'Album unranked successfully'
+        };
+
+    } catch (err) {
+        return {
+            code: err.code || 500,
+            message: err.message
+        };
+    }
+}
+
+export async function AddLikeOnSong(albumId) {
+    try {
+        // Check the number of liked songs
+        const likedSongsQuery = query(collection(db, 'Albums'), where('like', '==', true));
+        const likedSongsSnapshot = await getDocs(likedSongsQuery);
+
+        if (likedSongsSnapshot.size >= 5) {
+            return {
+                code: 400,
+                message: 'You can only like up to 5 songs'
+            };
+        }
+
+        const albumRef = doc(db, 'Albums', albumId);
+        const albumDoc = await getDoc(albumRef);
+
+        if (!albumDoc.exists()) {
+            return {
+                code: 404,
+                message: 'Album not found'
+            };
+        }
+
+        const existingAlbum = albumDoc.data();
+        const updatedAlbumData = {
+            ...existingAlbum,
+            like: true
+        };
+
+        await updateDoc(albumRef, updatedAlbumData);
+
+        return {
+            code: 200,
+            message: 'Album liked successfully'
+        };
+
+    } catch (err) {
+        return {
+            code: err.code || 500,
+            message: err.message
+        };
+    }
+}
+
+//  The remove like on song
+/** 
+ * @params {string} albumId - The album Firestore document ID 
+ * **/
+export async function RemoveLikeOnSong(albumId) {
+    try {
+        const albumRef = doc(db, 'Albums', albumId);
+        const albumDoc = await getDoc(albumRef);
+
+        if (!albumDoc.exists()) {
+            return {
+                code: 404,
+                message: 'Album not found'
+            };
+        }
+
+        const existingAlbum = albumDoc.data();
+        const updatedAlbumData = {
+            ...existingAlbum,
+            like: false
+        };
+
+        await updateDoc(albumRef, updatedAlbumData);
+
+        return {
+            code: 200,
+            message: 'Album unliked successfully'
+        };
+
+    } catch (err) {
+        return {
+            code: err.code || 500,
+            message: err.message
+        };
+    }
+}
+
+export async function getRankedSongs() {
+    try {
+        const rankedSongsQuery = query(collection(db, 'Albums'), where('rank', '==', true));
+        const rankedSongsSnapshot = await getDocs(rankedSongsQuery);
+
+        if (rankedSongsSnapshot.empty) {
+            return {
+                code: 404,
+                message: 'No ranked songs found'
+            };
+        }
+
+        const rankedSongs = rankedSongsSnapshot.docs.map(doc => ({
+            id: doc.id,
+            ...doc.data()
+        }));
+        
+        return {
+            code: 200,
+            song: rankedSongs
         };
 
     } catch (err) {

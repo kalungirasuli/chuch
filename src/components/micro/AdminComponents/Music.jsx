@@ -6,6 +6,7 @@ import { Alert } from "flowbite-react"
 import { loadAlbum,updateAlbum,getAllSongs,deleteAlbum } from "../../firebase/Functions/Music"
 export  function MusicAdmin(){
    const [Songs,setSong]=useState([])
+   const [dataGot,setDataGot]=useState(false)
 //    load the music on load
    useEffect(()=>{
        getAllSongs()
@@ -13,7 +14,8 @@ export  function MusicAdmin(){
             if(data.code!==200){
                 setSong([])
             }
-           setSong(data)
+           setSong(data.songs)
+           setDataGot(true)
        })
        .catch((err)=>{
               console.log(err)
@@ -85,12 +87,13 @@ export  function MusicAdmin(){
         }
         const layout={
             name:data.name,
-            audioUrl:data.audioUrl,
+            audioFile:data.audioUrl,
             artist:data.artist,
             lyrics:data.lyrics,
             coverFile:data.coverUrl,
             links:[{spotify:data.spotify,youtube:data.youtube,apple:data.apple}]
         }
+        console.log(layout)
         loadAlbum(layout)
         .then((response)=>{
             if(response.code!==200){
@@ -120,11 +123,11 @@ export  function MusicAdmin(){
                 <div className="div justify-end">
                     <button className="btn bg-yellow text-white p-3 rounded-[5px]" onClick={Showform}>Add Music</button>
                 </div>
-            <div className="div">
+            <div className="div flex flex-wrap gap-4">
                 {
-                    Songs.length>0?Songs.map((item,index)=>(
-                        <div className="div " key={index}>
-                        <Song key={index} src={item.coverUrl} id={item.id} title={item.name} onDelete={()=>{Delete(item.id)}} />
+                    Songs && Songs.length>0?Songs.map((item,index)=>(
+                        <div className="div" key={index}>
+                        <Song key={item.id} like={item.like} rank={item.rank} image={item.coverUrl} id={item.id} title={item.name} onDelete={()=>{Delete(item.id)}} />
                         {/* THE update MODAL */}
                         <Modal show={addForm} size="md" popup onClose={() => setForm(false)}>
                                 <Modal.Header/>
@@ -191,9 +194,9 @@ export  function MusicAdmin(){
                             </Modal>
                       </div>
                     )):(
-                        <p className="text-white  p-5">
-                            No music fetched 
-                        </p>
+                       <p>
+                        No data found yet
+                       </p>
                     )
                 }
                  <Modal show={addForm} size="md" popup onClose={() => setForm(false)}>

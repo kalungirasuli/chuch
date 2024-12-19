@@ -16,6 +16,11 @@ export default {
         red1:'#d51515',
         brown:'#b27b45'
       },
+      fontFamily: {
+        comfortaa: ['Comfortaa', 'sans-serif'],
+        poppins: ['Poppins', 'sans-serif'],
+        quicksand: ['Quicksand', 'sans-serif'],
+      },
       screens:{
         sm:'375px',
         md:'764px',

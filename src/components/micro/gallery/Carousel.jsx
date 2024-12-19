@@ -45,7 +45,7 @@ return(
           {
               items.map((item,index)=>(
                  <div key={index}>
-                    <Song title={item.title} src={item.src} id={item.id}/>
+                    <Song title={item.name} image={item.coverUrl} id={item.id}/>
                  </div>
               ))
           }

@@ -42,13 +42,20 @@ export function JumbotronSongPlay({song}) {
         audioRef.current.currentTime = progress * duration;
     };
 
+    useEffect(() => {
+        if (audioRef.current) {
+            audioRef.current.play();
+            setIsPlaying(true);
+        }
+    }, [song.audioUrl]);
+
     return (
         <>
-            {song ? song.map((item, index) => (
-                <div key={index} className={`div w-full flex flex-col gap-10 `}>
+            {song?  
+                <div  className={`  div w-full flex flex-col gap-10  `}>
                     <div className="div  bg-cover bg-no-repeat"
                     style={{
-                        backgroundImage: `url(${item.coverUrl ? item.coverUrl : ''})`,
+                        backgroundImage: `url(${song.coverUrl ? song.coverUrl : ''})`,
                         backgroundSize: 'cover',
                         backgroundPosition: 'center',
                         backgroundRepeat: 'no-repeat',  
@@ -62,10 +69,10 @@ export function JumbotronSongPlay({song}) {
                     </div>
                    <div className="div flex flex-col gap-5 p-10   w-[80%] m-auto md:gap-10 md:w-[70%] lg:max-w-[700px]">
                         <div className="album backdrop-blur-sm bg-white/30 p-2 px-5 rounded-[5px] w-[max-content] m-auto ">
-                            <p className='text-white text-[16px] font-semibold'>Album: {item.name && item.name.length > 31 ? item.name.substring(0, 30) + "..." : item.name}</p>
+                            <p className='text-white text-[16px] font-semibold'>Album: {song.name && song.name.length > 31 ? song.name.substring(0, 30) + "..." : song.name}</p>
                         </div>
                         <div className="name pb-5">
-                            <h3 className='text-[20px] md:text-[30px] text-white text-center font-extrabold'>{item.artist && item.artist.length > 30 ? item.artist.substring(0, 30) + "..." : item.artist}</h3>
+                            <h3 className='text-[20px] md:text-[30px] text-white text-center font-extrabold'>{song.artist && song.artist.length > 30 ? song.artist.substring(0, 30) + "..." : song.artist}</h3>
                         </div>
                         <div className="controls flex flex-col gap-5">
                             <div className="btns flex justify-center gap-3 ">
@@ -94,48 +101,48 @@ export function JumbotronSongPlay({song}) {
                             <h2 className='text-white text-[20px] text-left font-extrabold md:text-[30px] lg:text-[40px]'>Lyrics</h2>
                             <div className="div flex justify-end">
                                 <ul className='flex justify-between gap-3 w-[max-content]'>
-                                    <a className='flex justify-center'>
+                                    <a className='flex justify-center' download={`${song.id}.mp3`}>
                                         <MdOutlineDownload className='text-[40px] fill-white  m-auto' title='down song and lyrics' />
                                     </a>
-                                   {
-                                    item.links[0].spotify?(
-                                        <a className='flex justify-center' href={item.links[0].spotify}>
-                                        <img src="/iconImgs/spotify.png" alt="" className='w-[50px] m-auto ' title='listen on spotify' />
-                                    </a>
-                                    ):''
-                                   }
-                                  {
-                                    item.links[0].youtube?(
-                                        <a className='flex justify-center' href={item.links[0].youtube}>
-                                        <img src="/iconImgs/youtube.png" alt="" className='w-[50px] h-[50px] m-auto' title='listen on youtube' />
-                                    </a>
-                                    ):''
-                                  }
-                                {
-                                    item.links[0].apple?(
-                                        <a className='flex justify-center' href={item.link[0].apple}>
-                                        <img src="/iconImgs/applemusic.png" alt="" className='w-[50px] h-[50px] m-auto ' title='listen on apple music' />
-                                    </a>
-                                    ):''
-                                }
+
+                                    {song.links && song.links[0] && (
+                                        <>
+                                            {song.links[0].spotify && (
+                                                <a className='flex justify-center' href={song.links[0].spotify}>
+                                                    <img src="/iconImgs/spotify.png" alt="" className='w-[50px] m-auto' title='listen on spotify' />
+                                                </a>
+                                            )}
+                                            {song.links[0].youtube && (
+                                                <a className='flex justify-center' href={song.links[0].youtube}>
+                                                    <img src="/iconImgs/youtube.png" alt="" className='w-[50px] h-[50px] m-auto' title='listen on youtube' />
+                                                </a>
+                                            )}
+                                            {song.links[0].apple && (
+                                                <a className='flex justify-center' href={song.links[0].apple}>
+                                                    <img src="/iconImgs/applemusic.png" alt="" className='w-[50px] h-[50px] m-auto' title='listen on apple music' />
+                                                </a>
+                                            )}
+                                        </>
+                                    )}
                                 </ul>
                             </div>
                         </div>
                         <div className="div text-[15px] text-white text-left py-10">
-                            {item.lyrics ? item.lyrics : 'Failed to get lyrics'}
+                            {song.lyrics ? song.lyrics : 'Failed to get lyrics'}
                         </div>
                     </div>
                     <audio
                         ref={audioRef}
-                        src={item.audioUrl ? item.audioUrl : ''}
+                        src={song.audioUrl ? song.audioUrl : ''}
                         onTimeUpdate={handleTimeUpdate}
                         onLoadedMetadata={handleLoadedMetadata}
                         className='hidden audio'
                         type="audio/mp3"
+                        autoPlay
                     />
                     
                 </div>
-            )) : null}
+         : null}
         </>
     );
 }
