@@ -4,7 +4,7 @@ import { Modal } from "flowbite-react"
 import { useState,useEffect } from "react"
 import { Alert } from "flowbite-react"
 import { addEvent,deleteEvent,updateEvent,getAllEvents } from "../../firebase/Functions/Event"
-export  function MusicAdmin(){
+export  function EventAdmin(){
    const [Event,setEvents]=useState([])
 //    load the music on load
    useEffect(()=>{

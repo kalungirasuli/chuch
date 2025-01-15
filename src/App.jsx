@@ -2,7 +2,7 @@ import { Route,Routes,BrowserRouter } from "react-router-dom"
 import Home from "./components/main/Home"
 import Login from "./components/main/login"
 import SongPlay from "./components/main/SongPlay"
-// import Code from "./components/micro/inputs/code"
+import Code from "./components/micro/inputs/code"
 import UserLog from "./components/micro/inputs/user"
 import Admin from "./components/main/Admin"
 import Team from './components/main/Team'
@@ -11,7 +11,9 @@ import Term from "./components/main/Terms"
 import Music from "./components/main/Music"
 import Donate from "./components/main/donate"
 import UserDonate from "./components/micro/inputs/donate"
+
 function App() {
+  
  return(
   <>
     <BrowserRouter>
@@ -31,8 +33,15 @@ function App() {
         <Route path="/music" element={<Music/>}/>
       </Routes>
     </BrowserRouter>
+
+    
   </>
  )
 
 }
 export default App
+
+
+
+
+// vecient 0751496522

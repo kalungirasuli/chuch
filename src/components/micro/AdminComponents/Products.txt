@@ -1,0 +1,2 @@
+//This function to to read, delete,add and update products.
+//the products are display ans sorted with date.
