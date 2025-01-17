@@ -2,7 +2,7 @@ import { db } from "../fireAppConfig";
 import {collection,getDocs,addDoc,doc,query,where,updateDoc,deleteDoc,getDoc} from "firebase/firestore";
 import { storage } from "../fireAppConfig";
 import { getDownloadURL, ref,uploadBytes,deleteObject } from "firebase/storage";
-import { verifyToken } from "./Auth";
+// import { verifyToken } from "./Auth";
 import { v4 as uuidv4 } from "uuid";
 
 

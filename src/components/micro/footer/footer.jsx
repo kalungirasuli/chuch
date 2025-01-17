@@ -5,9 +5,9 @@ export function Footer(){
     return(
         <>
         <div className="footer bg-white flex flex-col gap-5">
-            <div className="img w-[100px] m-auto py-10 md:w-[200px] ">
+            <Link to="/" className="img w-[100px] m-auto py-10 md:w-[200px] ">
                 <img src="/logo.png" alt="logo" className="w-[100px] md:w-[200px] " />
-            </div>
+            </Link>
             <ul className="flex flex-row justify-center gap-5 w-[80%] m-auto md:gap-10 md:w-[50%] ">
                 <Link to='/' className="flex justify-center">
                     <img src="/iconImgs/spotify.png" className=" m-auto  w-[50px]" alt="img" />

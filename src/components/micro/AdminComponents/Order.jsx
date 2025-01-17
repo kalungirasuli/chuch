@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Alert } from "flowbite-react";
-import { getAllOrders, getUserOrders, updateOrderStatus } from "../../firebase/Functions/Orders"; // Adjust the import path as needed
+import { OrdersAll, UserOrders, UpdateOrder } from "../../firebase/Functions/Orders"; // Adjust the import path as needed
 
-export default function Order() {
+export  function Orders() {
     const [orders, setOrders] = useState([]);
     const [filteredOrders, setFilteredOrders] = useState([]);
     const [selectedDate, setSelectedDate] = useState('');
@@ -13,7 +13,7 @@ export default function Order() {
     const [alert, setAlert] = useState({ show: false, message: '', type: '' });
 
     useEffect(() => {
-        getAllOrders()
+        OrdersAll()
             .then((response) => {
                 if (response.code === 200) {
                     setOrders(response.orders);
@@ -36,7 +36,7 @@ export default function Order() {
 
     const handleRowClick = (userId) => {
         setLoading(true);
-        getUserOrders(userId)
+        UserOrders(userId)
             .then((response) => {
                 if (response.code === 200) {
                     setUserOrders(response.orders);
@@ -56,7 +56,7 @@ export default function Order() {
 
     const handleStatusUpdate = (orderId, newStatus) => {
         setLoading(true);
-        updateOrderStatus(orderId, newStatus)
+        UpdateOrder(orderId, newStatus)
             .then((response) => {
                 if (response.code === 200) {
                     setOrders(orders.map(order => order.id === orderId ? { ...order, status: newStatus } : order));

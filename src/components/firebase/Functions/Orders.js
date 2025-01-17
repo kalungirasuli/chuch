@@ -1,6 +1,6 @@
 import { db } from "../fireAppConfig";
-import {collection,getDocs,addDoc,doc,query,where,updateDoc} from "firebase/firestore";
-import { verifyToken } from "./Auth";
+import { collection, getDocs, addDoc, doc, query, where, updateDoc } from "firebase/firestore";
+// import { verifyToken } from "./Auth";
 export async function OrdersAll(){
  
     try{

@@ -21,9 +21,9 @@ export default function Navibar({route,params}){
     return(
         <>
         <div className="  backdrop-blur-sm bg-white/30   flex flex-row  justify-between  p-2 px-3 w-[95%] m-auto  rounded-[10px] md:px-5 md:rounded-[20px] md:w-full lg:w-[9s0%]">
-            <div className="logo">
+            <Link to="/" className="logo">
                 <img src="/logo.png" className=" w-[50px] h-[50px] md:w-[60px] md:h-[60px]" alt="logo" />
-            </div>
+            </Link>
              <div className="hidden md:flex justify-center  w-[70%] p-2 lg:w-[50%]">
              <Uls param={hiddenParam}/>
              </div>
