@@ -26,7 +26,7 @@ function App() {
           <Route index element={<UserDonate/>}/>
         </Route>
         <Route path="/team" element={<Team/>}/>
-        {/* <Route path="/admin" element={<Admin/>}/> */}
+        <Route path="/admin" element={<Admin/>}/> 
         <Route path='/events' element={<Events/>}/>
         <Route path="/playing/:id" element={<SongPlay/>}/>
         <Route path="/terms" element={<Term/>}/>

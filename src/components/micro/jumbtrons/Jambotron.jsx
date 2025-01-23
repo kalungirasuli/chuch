@@ -50,11 +50,26 @@ import { useNavigate } from "react-router-dom"
         </>
     )
 }
-function VideoBg(){
-    return(
-    <>
-        <video src="/test/bgvid.mp4" type='video/mp4' className=" h-full w-[100vw] absolute top-0 left-0 -z-50 object-cover md:h-full  " loop autoPlay muted ></video>
-        
-    </> 
-    )
+function VideoBg() {
+    const [videoSrc, setVideoSrc] = useState(null);
+
+    useEffect(() => {
+        setVideoSrc("/test/bgvid.mp4");
+    }, []);
+
+    return (
+        <>
+            {videoSrc && (
+                <video
+                    src={videoSrc}
+                    type="video/mp4"
+                    className="h-full w-[100vw] absolute top-0 left-0 -z-50 object-cover md:h-full"
+                    loop
+                    autoPlay
+                    muted
+                    loading="lazy"
+                ></video>
+            )}
+        </>
+    );
 }

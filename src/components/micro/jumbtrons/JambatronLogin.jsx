@@ -3,7 +3,7 @@ import { CopyRight } from '../footer/copyRight'
 export default function JambotronLogin({children}){
     return(
         <>
-        <div className="div bg-[url('../../../../public/test/login.jpg')] bg-cover bg-no-repeat fixed top-0 left-0 h-screen w-full flex flex-col justify-between">
+        <div className="div bg-[url('/test/login.jpg')] bg-cover bg-no-repeat fixed top-0 left-0 h-screen w-full flex flex-col justify-between">
             <div className="div p-2 px-0 md:p-5">
                 <Navibar/>
             </div>

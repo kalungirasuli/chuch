@@ -42,7 +42,7 @@ export default function Music() {
     return (
         <>
             <div className="bg-black">
-                <JambotronMusic bckimg={'../../../public/test/login.jpg'} />
+                <JambotronMusic bckimg={'/test/login.jpg'} />
                 <div className="div p-5 md:px-20 md:py-10">
                     <SubHead text="Music " />
                     <div className="div py-5">

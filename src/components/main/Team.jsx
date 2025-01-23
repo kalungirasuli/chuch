@@ -5,7 +5,7 @@ export default function Team(){
     return(
         <>
            <div className="div h-full max-h-[auto] bg-black">
-           <TeamJambo bckimg={'../../../public/test/clouds.jpg'}/>
+           <TeamJambo bckimg={'/test/clouds.jpg'}/>
            <WallMember/>
            </div>
         </>

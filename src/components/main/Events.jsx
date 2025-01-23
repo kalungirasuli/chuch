@@ -27,7 +27,7 @@ export default function Events(){
     return(
         <>
         <div className="div bg-black">
-            <EventJambo bckimg={'../../../public/test/events.jpg'}/>
+            <EventJambo bckimg={'/test/events.jpg'}/>
             <div className="div p-5 md:px-20 md:py-10">
                 <SubHead text={'Event'}/>  
                 <div className="div flex flex-col">

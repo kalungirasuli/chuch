@@ -3,7 +3,7 @@ import { Head } from '../text/SubHeading'
 export default function JambotronAdmin(){
     return(
         <>
-        <div className="div bg-[url('../../../../public/test/gravecross.jpg')] bg-cover bg-no-repeat h-auto w-full flex flex-col justify-between">
+        <div className="div bg-[url('/test/gravecross.jpg')] bg-cover bg-no-repeat h-auto w-full flex flex-col justify-between">
             <div className="div p-2 px-0 md:p-5">
                 <Navibar params='Login' route='/admin'/>
             </div>
